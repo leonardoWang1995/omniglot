@@ -12,7 +12,7 @@ function plot_motor_to_image(I,drawing,bool_start,lw)
     if ~exist('bool_start','var')
        bool_start = true; % show start position?
     end
-    if ~exist('lw','var')
+    if ~exist('lw','var')|isempty(lw)
        lw = 4; % line width 
     end
     
@@ -45,6 +45,9 @@ function plot_motor_to_image(I,drawing,bool_start,lw)
 end
 
 function plot_traj(stk,color,lw)
+    if iscell(stk)
+        stk=stk{1};
+    end
     ystk = stk(:,2);
     stk(:,2) = stk(:,1);
     stk(:,1) = ystk;       
